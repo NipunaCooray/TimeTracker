@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MovieTimeTracker</string>
+
+
+    <!--main_menu-->
+    <string name="label_add_new">Add movie</string>
+
+    <!--activity_add_movie-->
+    <string name="label_movie_name">Movie name</string>
+    <string name="label_movie_duration">Duration</string>
+    <string name="label_movie_date">Watched date</string>
+</resources>
