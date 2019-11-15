@@ -6,28 +6,36 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.movietimetracker.R
-import com.example.movietimetracker.model.Movie
-import java.text.SimpleDateFormat
+import com.example.movietimetracker.adapters.MainListAdapter
+import com.example.movietimetracker.viewmodels.MovieViewModel
 import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
 
-
+    private lateinit var movieViewModel: MovieViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var formatter= SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z")
-        var date = Date(System.currentTimeMillis())
 
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
+        val adapter = MainListAdapter(this)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
+        movieViewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
 
-        val myMovie = Movie("Spiderman",120,date)
+//        movieViewModel.allMovies.observe(this, Observer { movies ->
+//            // Update the cached copy of the words in the adapter.
+//            movies?.let { adapter.setMovies(it) }
+//        })
 
-        val dateString = formatter.format(date)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

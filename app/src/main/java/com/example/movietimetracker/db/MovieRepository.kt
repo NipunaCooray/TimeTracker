@@ -6,7 +6,7 @@ import com.example.movietimetracker.model.Movie
 
 // Declares the DAO as a private property in the constructor. Pass in the DAO
 // instead of the whole database, because you only need access to the DAO
-class DataRepository(private val movieDao: MovieDao) {
+class MovieRepository(private val movieDao: MovieDao) {
 
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.

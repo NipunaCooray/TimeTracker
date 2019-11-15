@@ -2,9 +2,12 @@ package com.example.movietimetracker.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.CalendarView
 import android.widget.EditText
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.movietimetracker.R
 import com.example.movietimetracker.model.Movie
@@ -28,7 +31,13 @@ class AddMovieActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_movie)
 
         setupViews()
-        movieViewModel = ViewModelProviders.of(this).get(MovieViewModel::class.java)
+
+        //Depricated method
+        //movieViewModel = ViewModelProviders.of(this).get(MovieViewModel::class.java)
+
+
+        movieViewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
+
 
     }
 
@@ -40,13 +49,21 @@ class AddMovieActivity : AppCompatActivity() {
 
         val movie = Movie(movieName,durationNumber, mUtilDate)
 
-        movieViewModel.insert(movie)
+        try {
+            movieViewModel.insert(movie)
+            Toast.makeText(this,"Saved",Toast.LENGTH_SHORT).show()
+            finish()
+        }catch (exception : Exception){
+            Log.e("Error !", "inside catch")
+        }
+
 
     }
 
     private fun setupViews() {
         mMovieNameEditText = findViewById(R.id.editText_movie_name)
         mDurationEditText = findViewById(R.id.editText_duration)
+        mUtilDate = Date()
 
         mCalenderView = findViewById(R.id.calendarView)
         mCalenderView.setOnDateChangeListener { view, year, month, dayOfMonth ->

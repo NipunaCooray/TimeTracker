@@ -11,7 +11,7 @@ data class Movie(
     var watchedDate : Date){
 
 
-        @PrimaryKey
+        @PrimaryKey(autoGenerate = true)
         var movieId: Int = 0
 
 }
