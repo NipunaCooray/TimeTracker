@@ -6,13 +6,13 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movietimetracker.R
 import com.example.movietimetracker.adapters.MainListAdapter
 import com.example.movietimetracker.viewmodels.MovieViewModel
-import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -31,10 +31,10 @@ class MainActivity : AppCompatActivity() {
 
         movieViewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
 
-//        movieViewModel.allMovies.observe(this, Observer { movies ->
-//            // Update the cached copy of the words in the adapter.
-//            movies?.let { adapter.setMovies(it) }
-//        })
+        movieViewModel.allMovies.observe(this, Observer { movies ->
+            // Update the cached copy of the words in the adapter.
+            movies?.let { adapter.setMovies(it) }
+        })
 
     }
 
